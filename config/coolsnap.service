@@ -1,0 +1,15 @@
+[Unit]
+Description=Wait for CPU to cool before shutdown
+DefaultDependencies=no
+Before=shutdown.target reboot.target poweroff.target halt.target
+
+[Service]
+Type=oneshot
+ExecStart=/opt/coolsnap/bin/coolsnap
+TimeoutStartSec=10min
+
+[Install]
+WantedBy=shutdown.target
+WantedBy=reboot.target
+WantedBy=poweroff.target
+WantedBy=halt.target
