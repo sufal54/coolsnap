@@ -37,7 +37,7 @@ Run the installer:
 
 ```bash
 chmod +x install.sh
-./install.sh
+sudo ./install.sh
 ```
 
 ## For Other Architectures
@@ -55,6 +55,8 @@ chmod +x build.sh
 ./build.sh
 ```
 
+require sudo permission after compiled
+
 The build script will automatically:
 
 - Build CoolSnap from source
@@ -68,6 +70,8 @@ Change the safe temperature at any time:
 ```bash
 coolsnap <temperature>
 ```
+
+Provide sudo permission
 
 Example:
 
@@ -97,6 +101,8 @@ Remove CoolSnap from your system:
 chmod +x uninstall.sh
 ./uninstall.sh
 ```
+
+Provide sudo permission
 
 # Requirements
 
