@@ -2,12 +2,18 @@
 
 set -e
 
-[ -x ./target/release/installer ] || chmod +x ./target/release/installer
+if [ "$1" = "rust" ]; then
+    [ -x ./target/release/installer ] || chmod +x ./target/release/installer
 
-./target/release/installer
+    sudo ./target/release/installer
+else
+    [ -x ./bash_script/installer.sh ] || chmod +x ./bash_script/installer.sh
 
-chmod +x /opt/coolsnap/bin/coolsnap
-chmod +x /opt/coolsnap/bin/temptool.sh
+    sudo ./bash_script/installer.sh
+fi
+
+sudo chmod +x /opt/coolsnap/bin/coolsnap
+sudo chmod +x /opt/coolsnap/bin/temptool.sh
 
 sudo systemctl enable coolsnap
 sudo systemctl start coolsnap

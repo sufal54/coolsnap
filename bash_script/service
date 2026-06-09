@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+LIMIT_FILE="/opt/coolsnap/temp_limit"
+
+while true; do
+    limit=$(cat "$LIMIT_FILE" 2>/dev/null || echo 50)
+
+    total=0
+    count=0
+
+    for zone in /sys/class/thermal/thermal_zone*/temp; do
+        raw=$(<"$zone")
+        total=$((total + raw / 1000))
+        count=$((count + 1))
+    done
+
+    temp=$((total / count))
+
+    (( temp < limit )) && break
+
+    sleep 2
+done

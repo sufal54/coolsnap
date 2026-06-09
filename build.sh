@@ -5,6 +5,6 @@ cargo build --release
 
 [ -x install.sh ] || chmod +x install.sh
 
-sudo ./install.sh
+sudo ./install.sh rust
 
 echo -e "\n\n\e[32mBuild and install successful!\e[0m"
