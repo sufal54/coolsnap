@@ -37,10 +37,10 @@ fn main() {
         }
     }
 
+    let limit = read_limit();
+
     loop {
         let temprature = read_tem(&core_loc);
-
-        let limit = read_limit();
 
         println!("{}", temprature);
         if temprature < limit {

@@ -2,8 +2,8 @@
 
 LIMIT_FILE="/opt/coolsnap/temp_limit"
 
+limit=$(cat "$LIMIT_FILE" 2>/dev/null || echo 50)
 while true; do
-    limit=$(cat "$LIMIT_FILE" 2>/dev/null || echo 50)
 
     total=0
     count=0

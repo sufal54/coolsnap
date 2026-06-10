@@ -1,15 +1,17 @@
 # CoolSnap
 
-CoolSnap is a Linux utility that helps protect your system during shutdown. Before powering off, it monitors CPU temperature and waits until the processor cools down to a user-defined safe temperature.
+CoolSnap is a Linux utility that helps protect your system during shutdown. When a poweroff, reboot, or shutdown request is issued, CoolSnap automatically checks the CPU temperature and delays the shutdown process until the processor cools to a user-defined safe temperature.
 
 ## Features
 
+- Automatically activates on poweroff, reboot, and shutdown requests.
 - Monitors CPU temperature before shutdown.
 - Allows a custom safe temperature threshold.
 - Valid temperature range: **40°C–80°C**.
 - Default safe temperature: **50°C**.
 - Automatic fallback shutdown after **10 minutes**, even if the target temperature is not reached.
 - Simple command-line interface.
+- Available in Bash and Rust implementations.
 
 ## Usage
 
@@ -59,7 +61,7 @@ The build script will automatically:
 
 - Build CoolSnap from source
 - Install it on your system
-- Perform the required setup
+- Configure automatic shutdown integration
 
 ### Install an Already Compiled Rust Build
 
@@ -90,12 +92,14 @@ Requirements:
 
 ## How It Works
 
-When a shutdown is requested:
+When a poweroff, reboot, or shutdown request is made:
 
-1. CoolSnap checks the current CPU temperature.
-2. If the temperature is above the configured threshold, it waits for the CPU to cool down.
-3. Once the temperature reaches the safe level, the system shuts down.
-4. If the target temperature is not reached within 10 minutes, CoolSnap shuts down the system anyway as a fail-safe.
+1. CoolSnap intercepts the request.
+2. The current CPU temperature is checked.
+3. If the temperature is above the configured threshold, CoolSnap waits for the processor to cool down.
+4. CPU temperature is monitored continuously.
+5. Once the temperature reaches the configured safe level, the original shutdown or reboot operation proceeds.
+6. If the target temperature is not reached within 10 minutes, CoolSnap performs the shutdown anyway as a fail-safe.
 
 ## Uninstallation
 
@@ -111,3 +115,9 @@ sudo ./uninstall.sh
 - Linux operating system
 - CPU temperature sensors supported by the system
 - Rust (only required when building the Rust version from source)
+
+## Notes
+
+- CoolSnap is intended to run automatically whenever the system is instructed to power off or reboot.
+- The utility ensures the processor has an opportunity to cool before power loss.
+- A built-in 10-minute timeout prevents indefinite waiting.
